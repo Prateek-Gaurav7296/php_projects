@@ -1,21 +1,27 @@
 <?php
+
+echo "Before DB connection";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // MySQL connection details
-$host = 'localhost';
-$db = 'url_shortener';
-$user = 'root';
-$pass = 'Test@1234';
+$host = "localhost";
+$db = "url_shortener";
+$user = "root";
+$pass = "";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+echo "After DB connection";
 function generateShortCode($length = 6) {
     return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 }
 
 if (isset($_POST['submit'])) {
+
+    echo "Form submitted!";
     $url = $_POST['url'];
     
     // Check if URL is valid

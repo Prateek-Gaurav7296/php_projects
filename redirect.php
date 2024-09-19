@@ -1,9 +1,11 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // MySQL connection details
-$host = 'localhost';
-$db = 'url_shortener';
-$user = 'root';
-$pass = 'Test@1234';
+$host = "localhost";
+$db = "url_shortener";
+$user = "root";
+$pass = "";
 
 $conn = new mysqli($host, $user, $pass, $db);
 

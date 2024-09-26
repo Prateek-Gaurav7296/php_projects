@@ -36,13 +36,15 @@ if (isset($_POST['submit'])) {
         } else {
             // Generate a unique short code
             $short_code = generateShortCode();
-            $sql = "INSERT INTO urls (original_url, short_code) VALUES (?, ?)";
+            $created_date = date('Y-m-d H:i:s');
+            $access_frequency = 0;
+            $sql = "INSERT INTO urls (original_url, short_code, created_date, access_frequency) VALUES (?, ?, ?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('ss', $url, $short_code);
+            $stmt->bind_param('ssss', $url, $short_code,$created_date,$access_frequency);
             $stmt->execute();
             $stmt->close();
         }
-        $shortened_url = "http://localhost/url_shortener/redirect.php?code=$short_code";
+        $shortened_url = "/redirect.php?code=$short_code";
     }
 }
 ?>
@@ -53,6 +55,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>URL Shortener</h1>
@@ -63,9 +66,23 @@ if (isset($_POST['submit'])) {
     </form>
 
     <?php if (isset($shortened_url)): ?>
-        <p>Shortened URL: <a href="<?= $shortened_url ?>"><?= $shortened_url ?></a></p>
+        <p>Shortened URL: <a href="<?= $shortened_url ?>"><?= $short_code ?></a></p>
     <?php elseif (isset($error)): ?>
         <p style="color:red;"><?= $error ?></p>
     <?php endif; ?>
+
+    <table style="width:100%">
+  <tr>
+    <td></td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+    
 </body>
 </html>

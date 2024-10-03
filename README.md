@@ -11,12 +11,14 @@ Follow the steps below to get the environment up and running:
 
 *1. Build the Docker Image*
 
+
 Before starting the application, you need to build the Docker image for the PHP container. Run the following command:
 docker build -t php-mysql .
 
 This will build the image using the Dockerfile (if present) or inline build instructions from docker-compose.yml.
 
 *2. Start the Docker Containers*
+
 
 Once the image is built, you can start the services (PHP and MySQL containers) by running:
 docker-compose up -d
@@ -25,18 +27,21 @@ This will start the containers in detached mode (running in the background). You
 
 *3. Stop the Docker Containers*
 
+
 To stop the running containers, use the following command:
 docker-compose down
 This stops and removes the containers but keeps the MySQL data volume intact.
 
 *4. Re-initialize the Database (Optional)*
 
+
 If you want to completely remove the containers along with the database volume (to reset everything, including data), you can use the -v flag:
 docker-compose down -v
 
 This will remove both the containers and the associated volumes, including the MySQL database data.
 
-Commands Recap
+Commands Recap:
+
 1.Build the Docker Image:
   docker build -t php-mysql .
   

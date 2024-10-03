@@ -44,7 +44,7 @@ Commands Recap
   docker-compose up -d
   
 3.Stop the Containers:
-  docker-compose up -d
+  docker-compose down
   
 4.Re-initialize the Database (Optional):
   docker-compose down -v

@@ -37,14 +37,13 @@ docker-compose down -v
 This will remove both the containers and the associated volumes, including the MySQL database data.
 
 Commands Recap
-
-	1.  Build the Docker Image:
+1.Build the Docker Image:
   docker build -t php-mysql .
- 	2.	Start the Containers:
+2.Start the Containers:
   docker-compose up -d
-  3.	Stop the Containers:
+3.Stop the Containers:
   docker-compose up -d
-  4.	Re-initialize the Database (Optional):
+4.Re-initialize the Database (Optional):
   docker-compose down -v
 
     

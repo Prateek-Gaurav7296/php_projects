@@ -56,3 +56,12 @@ If you want to completely remove the containers along with the database volume (
 docker-compose down -v
 ```
 This will remove both the containers and the associated volumes, including the MySQL database data.
+
+
+To display as API:
+
+```sh
+brew install cloudflared
+cloudflared tunnel --url localhost:8080
+```
+

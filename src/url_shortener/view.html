@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <div class="center">
+        <h1>URL Shortener</h1>
+
+        <form action="index.php" method="post">
+            <input type="text" name="url" placeholder="Enter your URL" required>
+            <button type="submit" name="submit">Shorten URL</button>
+        </form>
+
+        <?php if (isset($shortened_url)): ?>
+            <p>Shortened URL: <a href="<?= $shortened_url ?>" id="shortUrl"><?= $shortened_url ?></a>
+            <button type="button" onclick="copyToClipboard()">Copy</button></p>
+        <?php elseif (isset($error)): ?>
+            <p style="color:red;"><?= $error ?></p>
+        <?php endif; ?>
+
+        <script>
+            function copyToClipboard() {
+                var tempInput = document.createElement("input");
+                tempInput.value = document.getElementById("shortUrl").textContent;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("Copied to clipboard: " + tempInput.value);
+            }
+        </script>
+
+        <h2>URL Records</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Short URL</th>
+                <th>Created Date</th>
+                <th>Access Frequency</th>
+                <th>Delete</th>
+            </tr>
+            <?php while($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?= $row['id'] ?></td>
+                <td><a href="/url_shortener/redirect.php?code=<?= $row['short_code'] ?>"><?= $row['short_code'] ?></a></td>
+                <td><?= $row['created_date'] ?></td>
+                <td><?= $row['access_frequency'] ?></td>
+                <td>
+                    <form action="index.php" method="post">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <button type="submit" name="delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
+</body>
+</html>
